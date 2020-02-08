@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.ehcache.mapper.UserPermissionMapper">
+    <resultMap id="permission" type="com.example.ehcache.bean.Permission">
+        <id property="id" column="id" javaType="java.lang.Integer" jdbcType="NUMERIC"/>
+        <id property="url" column="url" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <id property="name" column="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="findByUserName" resultMap="permission">
+        select tp.ID,tp.URL,tp.NAME from t_role tr
+        left join t_user_role tur on tr.ID = tur.ROLE_ID
+        left join t_user tu on tur.USER_ID = tu.ID
+        left join t_role_permission trp on trp.RID = tr.ID
+        left join t_permission tp on trp.PID = tp.ID
+        where tu.USERNAME = #{userName}
+    </select>
+</mapper>
