@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<p>你好！[[${user.userName}]]</p>
+<!--<h3>权限测试链接</h3>-->
+<p shiro:hasRole="admin">你的角色为超级管理员</p>
+<p shiro:hasRole="test">你的角色为测试账户</p>
+<div>
+    <!--<a th:href="@{/user/list}">获取用户信息</a>
+    <a th:href="@{/user/add}">新增用户</a>
+    <a th:href="@{/user/delete}">删除用户</a>-->
+    <!--thymeleaf shiro写法1-->
+    <!--<a shiro:hasPermission="user:user" th:href="@{/user/list}">获取用户信息</a>
+    <a shiro:hasPermission="user:add" th:href="@{/user/add}">新增用户</a>
+    <a shiro:hasPermission="user:delete" th:href="@{/user/delete}">删除用户</a>-->
+    <!--thymeleaf shiro写法2(官方写法)-->
+    <shiro:hasPermission name="user:user"><a th:href="@{/user/list}">获取用户信息</a></shiro:hasPermission>
+    <shiro:hasPermission name="user:add"><a th:href="@{/user/add}">新增用户</a></shiro:hasPermission>
+    <shiro:hasPermission name="user:delete"><a th:href="@{/user/delete}">删除用户</a></shiro:hasPermission>
+</div>
+<a th:href="@{/logout}">注销</a>
+</body>
+</html>
