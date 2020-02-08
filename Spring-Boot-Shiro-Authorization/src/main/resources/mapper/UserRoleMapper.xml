@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.authorization.mapper.UserRoleMapper">
+    <resultMap id="role" type="com.example.authorization.bean.Role">
+        <id column="id" property="id" javaType="java.lang.Integer" jdbcType="NUMERIC"/>
+        <id column="name" property="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <id column="memo" property="memo" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="findByUserName" resultMap="role">
+        select tr.ID,tr.NAME,tr.MEMO from t_role tr
+        left join t_user_role tur on tr.ID = tur.ROLE_ID
+        left join t_user tu on tu.ID = tur.USER_ID
+        where tu.USERNAME = #{userName}
+    </select>
+</mapper>
