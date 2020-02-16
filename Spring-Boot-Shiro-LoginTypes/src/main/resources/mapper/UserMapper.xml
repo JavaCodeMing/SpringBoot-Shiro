@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.logintypes.mapper.UserMapper">
+    <resultMap id="User" type="com.example.logintypes.bean.User">
+        <id column="id" property="id" javaType="java.lang.Integer" jdbcType="NUMERIC"/>
+        <id column="username" property="userName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <id column="passwd" property="password" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <id column="phone" property="phone" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <id column="create_time" property="createTime" javaType="java.util.Date" jdbcType="DATE"/>
+        <id column="status" property="status" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="findByUserName" resultMap="User">
+        select * from t_user where username = #{userName}
+    </select>
+    <select id="findByPhone" resultMap="User">
+        select * from t_user where phone = #{phone}
+    </select>
+</mapper>
